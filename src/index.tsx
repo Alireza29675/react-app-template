@@ -1,11 +1,18 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react"
+import ReactDOM from "react-dom"
+import { Router } from "@reach/router"
 
-import './stylesheets/main.scss'
-import App from './components/App'
+import "./stylesheets/main.scss"
 
-import * as serviceWorker from './serviceWorker';
+import Home from "./pages/Home"
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import * as serviceWorker from "./serviceWorker"
 
-serviceWorker.unregister();
+ReactDOM.render(
+  <Router>
+    <Home path="/" default />
+  </Router>,
+  document.getElementById("root")
+)
+
+serviceWorker.unregister()
