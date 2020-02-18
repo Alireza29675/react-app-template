@@ -25,6 +25,7 @@ const getClientEnvironment = require("./env")
 const ModuleNotFoundPlugin = require("react-dev-utils/ModuleNotFoundPlugin")
 const ForkTsCheckerWebpackPlugin = require("react-dev-utils/ForkTsCheckerWebpackPlugin")
 const typescriptFormatter = require("react-dev-utils/typescriptFormatter")
+const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin")
 
 const postcssNormalize = require("postcss-normalize")
 
@@ -271,10 +272,7 @@ module.exports = function(webpackEnv) {
       alias: {
         // Support React Native Web
         // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
-        "react-native": "react-native-web",
-        $shared: paths.src.shared,
-        $components: paths.src.components,
-        $stylesheets: paths.src.stylesheets
+        "react-native": "react-native-web"
       },
       plugins: [
         // Adds support for installing with Plug'n'Play, leading to faster installs and adding
@@ -285,6 +283,9 @@ module.exports = function(webpackEnv) {
         // To fix this, we prevent you from importing files out of src/ -- if you'd like to,
         // please link the files into your node_modules/ and let module-resolution kick in.
         // Make sure your source files are compiled, as they will not be processed in any way.
+        new TsconfigPathsPlugin({
+          configFile: paths.appTsConfig
+        }),
         new ModuleScopePlugin(paths.appSrc, [paths.appPackageJson])
       ]
     },
@@ -316,15 +317,6 @@ module.exports = function(webpackEnv) {
             }
           ],
           include: paths.appSrc
-        },
-        {
-          test: /\.(js|mjs|jsx|ts|tsx)$/,
-          use: [
-            {
-              loader: "astroturf/loader",
-              options: { extension: ".module.scss" }
-            }
-          ]
         },
         {
           // "oneOf" will traverse all following loaders until one will
