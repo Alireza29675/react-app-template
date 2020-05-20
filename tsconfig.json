@@ -4,7 +4,7 @@
     "paths": {
       "$components/*": ["components/*"],
       "$shared/*": ["shared/*"],
-      "$stores/*": ["stores/*"],
+      "$store/*": ["store/*"],
       "$pages/*": ["pages/*"],
       "$stylesheets/*": ["stylesheets/*"]
     },

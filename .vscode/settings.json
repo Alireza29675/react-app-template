@@ -24,5 +24,6 @@
     "**/scripts": true,
     "**/*.lock": true,
     "**/tsconfig.json": true
-  }
+  },
+  "deno.enable": false
 }
