@@ -1,1 +1,1 @@
-# FexPal Client
+# React Application
